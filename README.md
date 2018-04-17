@@ -195,5 +195,29 @@ db.maps.insert([{
 	"Type": "Control"
 }])
 ```
-
+You also need to have competitive data. They are putting in the competitive collection
+```
+db.competitive.insert([{
+   "Date": "4/1/2018",
+   "Map": "Temple of Anubis",
+   "Character": "Orisa",
+   "Result": "W",
+   "Season": 9,
+   "Reason": "",
+   "Rank": "Master",
+   "SR": 3691,
+   "Diff": 25
+ },
+ {
+   "Date": "4/3/2018",
+   "Map": "King's Row",
+   "Character": "Moira",
+   "Result": "W",
+   "Season": 9,
+   "Reason": "Thrower other side",
+   "Rank": "Master",
+   "SR": 3715,
+   "Diff": 24
+ }])
+ ```
 
