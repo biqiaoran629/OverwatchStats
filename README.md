@@ -1,4 +1,4 @@
-# Project Title
+ Project Title
 
 Overwatch stats tracker for users to record their in game stats
 
@@ -220,4 +220,3 @@ db.competitive.insert([{
    "Diff": 24
  }])
  ```
-
