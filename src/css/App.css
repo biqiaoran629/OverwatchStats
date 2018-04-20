@@ -34,12 +34,14 @@
   flex:1;
   width:90%;
   margin-left: 5%;
+  margin-top: 20px;
 }
 
 .tableWrapperOpen {
   flex:1;
   width:80%;
   margin-left: 17%;
+  margin-top: 20px;
 }
 /* Slider */
 

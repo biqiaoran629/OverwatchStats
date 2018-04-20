@@ -7,6 +7,7 @@ import 'react-awesome-button/dist/themes/theme-blue.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Snackbar from 'material-ui/Snackbar';
 import { PacmanLoader} from 'react-spinners';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 const columns = [{
     dataField: 'Date',
@@ -73,6 +74,44 @@ const columns = [{
     }
 }];
 
+const qpColumns = [{
+    dataField: 'Date',
+    text: 'Date',
+    sort: true,
+    headerStyle: {
+        backgroundColor: '#f4eef1'
+    }
+}, {
+    dataField: 'Map',
+    text: 'Map',
+    sort: true,
+    headerStyle: {
+        backgroundColor: '#f4eef1'
+    }
+}, {
+    dataField: 'Character',
+    text: 'Character',
+    sort: true,
+    headerStyle: {
+        backgroundColor: '#f4eef1'
+    }
+}, {
+    dataField: 'Result',
+    text: 'Result',
+    sort: true,
+    headerStyle: {
+        backgroundColor: '#f4eef1'
+    }
+}, {
+    dataField: 'Mode',
+    text: 'Mode',
+    sort: true,
+    headerStyle: {
+        backgroundColor: '#f4eef1'
+    }
+}
+];
+
 const rowStyle = (row, rowIndex) => {
     const style = {};
     if (row.Result === 'W') {
@@ -132,17 +171,36 @@ class App extends Component {
         });
     }.bind(this);
 
+    handleTabValueChange = function(value) {
+  //      if (this.state.qpStats.length) {
+            this.setState({
+                tabValue: value
+            })
+ //}
+        // else {
+        //     axios.get(`http://localhost:3001/quickplay`)
+        //         .then(res => {
+        //             this.setState({
+        //                 qpStats: res.data,
+        //                 tabValue: value
+        //             });
+        //         });
+        // }
+    }.bind(this);
+
     constructor(props){
         super(props);
 
         this.state = {
             competitiveStats: [],
+            qpStats: [],
             filter: '',
             heroes: [],
             maps: [],
             isSlideMenuOpen: false,
             showMsg: false,
-            loading: false
+            loading: false,
+            tabValue: "competitive"
         }
     }
 
@@ -169,9 +227,54 @@ class App extends Component {
     }
 
     render() {
-        let filteredData = this.state.filter ? this.state.competitiveStats.filter(value => {
+
+        let competitiveData = this.state.filter ? this.state.competitiveStats.filter(value => {
             return value.Character.toString().toLowerCase() === this.state.filter.toLowerCase()
         }) : this.state.competitiveStats;
+
+        let qpData = this.state.filter ? this.state.qpStats.filter(value => {
+            return value.Character.toString().toLowerCase() === this.state.filter.toLowerCase()
+        }) : this.state.qpStats;
+
+        let filteredData = this.state.tabValue === 'competitive' ? (competitiveData) : (qpData);
+
+        const LoadingIcon = () => {
+            return (<div style={{position: 'absolute', top: '40%', left: '40%'}}>
+                <PacmanLoader
+                    color={'#4A90E2'}
+                    loading={true}
+                    size={150}
+                />
+            </div>)
+        }
+
+        function CompetitiveSection(props) {
+            return (<div>
+                <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
+                    <Table data = {props.filteredData} columns = {props.columns} rowStyle = {rowStyle}/>
+                </div>
+                <Snackbar
+                    open={props.showMsg}
+                    message="Insert Successful"
+                    autoHideDuration={4000}
+                    onRequestClose={props.handleSnackbarClose}
+                />
+            </div>)
+        }
+
+        function QuickplaySection(props) {
+            return (<div>
+                <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
+                    <Table data = {props.filteredData} columns = {props.columns} rowStyle = {rowStyle}/>
+                </div>
+                <Snackbar
+                    open={props.showMsg}
+                    message="Insert Successful"
+                    autoHideDuration={4000}
+                    onRequestClose={props.handleSnackbarClose}
+                />
+            </div>)
+        }
 
         return (
             <MuiThemeProvider>
@@ -187,26 +290,32 @@ class App extends Component {
                     </header>
                     {this.state.loading ?
                         (
-                            <div style={{position:'absolute', top: '40%', left: '40%'}}>
-                                <PacmanLoader
-                                    color={'#4A90E2'}
-                                    loading={true}
-                                    size={150}
-                                />
-                            </div>
+                            <LoadingIcon />
                         ) :
-                        (
-                            <div>
-                                <div className= { this.state.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
-                                    <Table data = {filteredData} columns = {columns} rowStyle = {rowStyle}/>
-                                </div>
-                                <Snackbar
-                                    open={this.state.showMsg}
-                                    message="Insert Successful"
-                                    autoHideDuration={4000}
-                                    onRequestClose={this.handleSnackbarClose}
-                                />
-                            </div>
+                        (      <Tabs
+                                value={this.state.tabValue}
+                                onChange={this.handleTabValueChange}
+                            >
+                                <Tab label="Competitive" value="competitive">
+                                    <CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}
+                                                        filteredData = {filteredData}
+                                                        columns = {columns}
+                                                        onRequestClose = {this.handleSnackbarClose}
+                                                        showMsg = {this.state.showMsg}
+                                    />
+                                </Tab>
+                                <Tab label="Quickplay" value="quickplay">
+                                    <div>
+                                        <QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}
+                                                            filteredData = {filteredData}
+                                                            columns = {qpColumns}
+                                                            onRequestClose = {this.handleSnackbarClose}
+                                                            showMsg = {this.state.showMsg}
+                                        />
+                                    </div>
+                                </Tab>
+                            </Tabs>
+
                         )}
                 </div>
             </MuiThemeProvider>
