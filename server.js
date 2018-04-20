@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 
 Competitive = require('./models/competitive');
 
+Quickplay = require('./models/quickplay');
+
 Heroes = require('./models/heroes');
 
 Maps = require('./models/maps');
@@ -33,6 +35,17 @@ app.get('/competitive', function(req, res){
 		}
 		res.json(competitiveRecords);
 	})
+});
+
+//Get quickplay records
+
+app.get('/quickplay', function(req, res){
+    Quickplay.getQuickplay(function(err, quickplayRecords){
+        if (err) {
+            throw err;
+        }
+        res.json(quickplayRecords);
+    })
 });
 
 app.get('/heroes', function(req, res){
@@ -65,6 +78,15 @@ app.post('/competitive', function(req, res){
     })
 });
 
+app.post('/quickplay', function(req, res){
+    var quickplay = req.body;
+    Quickplay.addQuickplay(quickplay, function(err, quickplay){
+        if (err) {
+            throw err;
+        }
+        res.json(quickplay);
+    })
+});
 
 app.listen(3001);
 

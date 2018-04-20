@@ -17,7 +17,7 @@ const style = {
     width: '230px'
 };
 
-class InsertSection extends React.Component {
+class CompetitiveInsertSection extends React.Component {
 
     constructor(props) {
         super(props);
@@ -201,7 +201,7 @@ class InsertSection extends React.Component {
                 <RaisedButton label="Insert"
                               primary={true}
                               style={style}
-                              onClick={() => this.handleInsert(this.props.handleNewRecord)}
+                              onClick={() => this.handleInsert(this.props.handleNewCompetitiveRecord)}
                               disabled={isDisabled}
                 />
             </form>
@@ -209,4 +209,4 @@ class InsertSection extends React.Component {
     }
 }
 
-export default InsertSection;
+export default CompetitiveInsertSection;

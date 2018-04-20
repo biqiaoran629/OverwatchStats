@@ -10,7 +10,8 @@ import {
 } from 'react-accessible-accordion';
 
 import 'react-accessible-accordion/dist/fancy-example.css';
-import InsertSection from "./InsertSection";
+import CompetitiveInsertSection from "./CompetitiveInsertSection";
+import QuickplayInsertSection from "./QuickplayInsertSection";
 import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
@@ -76,12 +77,22 @@ class Slider extends React.Component {
                         </AccordionItem>
                         <AccordionItem>
                             <AccordionItemTitle className="accordion_title">
-                                <text>Insert</text>
+                                <text>Insert Competitive</text>
                                 <i className="material-icons">expand_more</i>
                             </AccordionItemTitle>
                             <AccordionItemBody>
-                                <InsertSection heroes = {this.props.heroes}
-                                               maps = {this.props.maps} handleNewRecord = {this.props.handleNewRecord} />
+                                <CompetitiveInsertSection heroes = {this.props.heroes}
+                                                          maps = {this.props.maps} handleNewCompetitiveRecord = {this.props.handleNewCompetitiveRecord} />
+                            </AccordionItemBody>
+                        </AccordionItem>
+                        <AccordionItem>
+                            <AccordionItemTitle className="accordion_title">
+                                <text>Insert Quickplay</text>
+                                <i className="material-icons">expand_more</i>
+                            </AccordionItemTitle>
+                            <AccordionItemBody>
+                                <QuickplayInsertSection heroes = {this.props.heroes}
+                                                          maps = {this.props.maps} handleNewQuickplayRecord = {this.props.handleNewQuickplayRecord} />
                             </AccordionItemBody>
                         </AccordionItem>
                     </Accordion>

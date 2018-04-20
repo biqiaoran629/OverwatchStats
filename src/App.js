@@ -158,9 +158,16 @@ class App extends Component {
         });
     }.bind(this);
 
-    handleNewRecord = function(record) {
+    handleNewCompetitiveRecord = function(record) {
         this.setState({
             competitiveStats: [...this.state.competitiveStats, record],
+            showMsg: true
+        })
+    }.bind(this);
+
+    handleNewQuickplayRecord = function(record) {
+        this.setState({
+            quickplayStats: [...this.state.quickplayStats, record],
             showMsg: true
         })
     }.bind(this);
@@ -172,20 +179,20 @@ class App extends Component {
     }.bind(this);
 
     handleTabValueChange = function(value) {
-  //      if (this.state.qpStats.length) {
+        if (this.state.quickplayStats.length) {
             this.setState({
                 tabValue: value
             })
- //}
-        // else {
-        //     axios.get(`http://localhost:3001/quickplay`)
-        //         .then(res => {
-        //             this.setState({
-        //                 qpStats: res.data,
-        //                 tabValue: value
-        //             });
-        //         });
-        // }
+        }
+        else {
+            axios.get(`http://localhost:3001/quickplay`)
+                .then(res => {
+                    this.setState({
+                        quickplayStats: res.data,
+                        tabValue: value
+                    });
+                });
+        }
     }.bind(this);
 
     constructor(props){
@@ -193,7 +200,7 @@ class App extends Component {
 
         this.state = {
             competitiveStats: [],
-            qpStats: [],
+            quickplayStats: [],
             filter: '',
             heroes: [],
             maps: [],
@@ -232,9 +239,9 @@ class App extends Component {
             return value.Character.toString().toLowerCase() === this.state.filter.toLowerCase()
         }) : this.state.competitiveStats;
 
-        let qpData = this.state.filter ? this.state.qpStats.filter(value => {
+        let qpData = this.state.filter ? this.state.quickplayStats.filter(value => {
             return value.Character.toString().toLowerCase() === this.state.filter.toLowerCase()
-        }) : this.state.qpStats;
+        }) : this.state.quickplayStats;
 
         let filteredData = this.state.tabValue === 'competitive' ? (competitiveData) : (qpData);
 
@@ -283,7 +290,8 @@ class App extends Component {
                             heroes = {this.state.heroes}
                             imgOnClick={ (name) => this.onClickHandler(name)}
                             maps = {this.state.maps}
-                            handleNewRecord={ (record) => this.handleNewRecord(record)}
+                            handleNewCompetitiveRecord={ (record) => this.handleNewCompetitiveRecord(record)}
+                            handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}
                             handleResetFilter={() => this.onPressResetButton()}/>
                     <header className="App-header">
                         <h1 className="App-title">Welcome to Overwatch Stats Tracker</h1>
