@@ -220,6 +220,10 @@ class App extends Component {
             .then(res => {
                 this.setState({ competitiveStats: res.data });
             });
+        axios.get(`http://localhost:3001/quickplay`)
+            .then(res => {
+                this.setState({ quickplayStats: res.data });
+            });
         axios.get(`http://localhost:3001/heroes`)
             .then(res => {
                 this.setState({ heroes: res.data });
@@ -294,7 +298,7 @@ class App extends Component {
                             handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}
                             handleResetFilter={() => this.onPressResetButton()}/>
                     <header className="App-header">
-                        <h1 className="App-title">Welcome to Overwatch Stats Tracker</h1>
+                        <h1 className="App-title">Overwatch Stats Tracker</h1>
                     </header>
                     {this.state.loading ?
                         (
