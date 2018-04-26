@@ -19,6 +19,8 @@ const style = {
     width: '230px'
 };
 
+let renderResult = true;
+
 class QuickplayInsertSection extends React.Component {
 
     constructor(props) {
@@ -39,9 +41,17 @@ class QuickplayInsertSection extends React.Component {
     }
 
     handleMapSelect = function(index) {
-        this.setState({
-            Map: maps[index]
-        });
+        if (renderResult) {
+            this.setState({
+                Map: maps[index]
+            });
+        }
+        else {
+            this.setState({
+                Map: maps[index],
+                Mode: "N/A"
+            });
+        }
     }
 
     handleModeSelect = function(index) {
@@ -81,6 +91,8 @@ class QuickplayInsertSection extends React.Component {
 
     render() {
 
+        const map = this.state.Map;
+
         heroes = this.props.heroes.map(index => (
             index.Name
         ));
@@ -89,7 +101,20 @@ class QuickplayInsertSection extends React.Component {
             index.Name
         ));
 
-        const isDisabled =  this.state.Map === '' || this.state.Character === '' || this.state.Result === '' || this.state.Mode === '' ;
+        let selectedMapType = this.props.maps.find(function(obj){
+            return obj.Name === map;
+        })
+
+        if (selectedMapType) {
+            if (selectedMapType.Type === "Control") {
+                renderResult = false;
+            }
+            else {
+                renderResult = true;
+            }
+        }
+
+        const isDisabled =  this.state.Map === '' || this.state.Character === '' || this.state.Result === '';
 
         return (
             <form noValidate autoComplete="off" style={{textAlign: 'center', marginBottom: '50px'}}>
@@ -112,11 +137,11 @@ class QuickplayInsertSection extends React.Component {
                     })}
                 </SelectField>
                 <br />
-                <SelectField floatingLabelText="Mode" onChange={(evt, newIndex) => this.handleModeSelect(newIndex)} value={this.state.Mode}  style = {styles} labelStyle={{textAlign: 'left'}}>
+                {renderResult ? (<SelectField floatingLabelText="Mode" onChange={(evt, newIndex) => this.handleModeSelect(newIndex)} value={this.state.Mode}  style = {styles} labelStyle={{textAlign: 'left'}}>
                     {modes.map(function(w, index){
                         return  <MenuItem value={w} primaryText={modes[index]} />;
                     })}
-                </SelectField>
+                </SelectField>) : ('')}
                 <br />
                 <RaisedButton label="Insert"
                               primary={true}
