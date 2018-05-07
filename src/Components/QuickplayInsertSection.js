@@ -1,15 +1,12 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
-import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const rank = ["Bronze","Silver","Gold","Platinum","Diamond","Master","Grandmaster"]
+const results = ["Win","Lose"]
 
-const results = ["Win","Draw","Lose"]
-
-const modes = ["Attack","Defense","N/A"]
+const modes = ["Attack","Defense"]
 
 const styles = {width: '230px', textAlign: 'left'};
 
@@ -30,7 +27,7 @@ class QuickplayInsertSection extends React.Component {
             Character: '',
             Result: '',
             Season: '',
-            Mode: ''
+            Mode: 'N/A'
         }
     }
 
@@ -40,7 +37,19 @@ class QuickplayInsertSection extends React.Component {
         });
     }
 
-    handleMapSelect = function(index) {
+    handleMapSelect = function(index, map) {
+        let selectedMapType = this.props.maps.find(function(obj){
+            return obj.Name === map;
+        })
+
+        if (selectedMapType) {
+            if (selectedMapType.Type === "Control") {
+                renderResult = false;
+            }
+            else {
+                renderResult = true;
+            }
+        }
         if (renderResult) {
             this.setState({
                 Map: maps[index]
@@ -125,7 +134,7 @@ class QuickplayInsertSection extends React.Component {
                     })}
                 </SelectField>
                 <br />
-                <SelectField floatingLabelText="Map" onChange={(evt, newIndex) => this.handleMapSelect(newIndex)} value={this.state.Map}  style = {styles} labelStyle={{textAlign: 'left'}}>
+                <SelectField floatingLabelText="Map" onChange={(evt, newIndex) => this.handleMapSelect(newIndex, this.state.Map)} value={this.state.Map}  style = {styles} labelStyle={{textAlign: 'left'}}>
                     {maps.map(function(w, index){
                         return  <MenuItem value={w} primaryText={maps[index]} />;
                     })}

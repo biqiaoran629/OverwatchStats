@@ -1,7 +1,7 @@
 import React from 'react'
 import BootstrapTable from 'react-bootstrap-table-next';
 
-const Table = ({ data, columns, rowStyle }) => {
+const Table = ({ data, columns, rowStyle, rowEvents }) => {
     return (
         <BootstrapTable
             keyField='id'
@@ -9,6 +9,7 @@ const Table = ({ data, columns, rowStyle }) => {
             columns={ columns }
             bordered={ false }
             rowStyle ={ rowStyle }
+            rowEvents={ rowEvents }
             condensed/>
     )
 }

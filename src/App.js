@@ -1,141 +1,99 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import Table from './Components/Table';
+import DataGrid from './Components/DataGrid';
 import Slider from './Components/SlideMenu';
 import axios from 'axios';
 import 'react-awesome-button/dist/themes/theme-blue.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Snackbar from 'material-ui/Snackbar';
 import { PacmanLoader} from 'react-spinners';
+import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-const columns = [{
-    dataField: 'Date',
-    text: 'Date',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Map',
-    text: 'Map',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Character',
-    text: 'Character',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Result',
-    text: 'Result',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Season',
-    text: 'Season',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Reason',
-    text: 'Reason',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Rank',
-    text: 'Rank',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'SR',
-    text: 'SR',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Diff',
-    text: 'Diff',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}];
+const columns = [
+    {
+        key: 'id',
+        name: 'Id',
+        sortable: true
+    },
+    {
+        key: 'Date',
+        name: 'Date',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Map',
+        name: 'Map',
+        sortable: true
+    }, {
+        key: 'Character',
+        name: 'Character',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Result',
+        name: 'Result',
+        editable: true,
+        sortable: true
+    }, {
+        key: 'Season',
+        name: 'Season',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Reason',
+        name: 'Reason',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Rank',
+        name: 'Rank',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'SR',
+        name: 'SR',
+        editable: true,
+        sortable: true
+    }, {
+        key: 'Diff',
+        name: 'Diff',
+        sortable: true,
+        editable: true
+    }];
 
-const qpColumns = [{
-    dataField: 'Date',
-    text: 'Date',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
+const qpColumns = [
+    {
+        key: 'id',
+        name: 'Id',
+        sortable: true
+    },
+    {
+        key: 'Date',
+        name: 'Date',
+        sortable: true
+    }, {
+        key: 'Map',
+        name: 'Map',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Character',
+        name: 'Character',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Result',
+        name: 'Result',
+        sortable: true,
+        editable: true
+    }, {
+        key: 'Mode',
+        name: 'Mode',
+        sortable: true,
+        editable: true
     }
-}, {
-    dataField: 'Map',
-    text: 'Map',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Character',
-    text: 'Character',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Result',
-    text: 'Result',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}, {
-    dataField: 'Mode',
-    text: 'Mode',
-    sort: true,
-    headerStyle: {
-        backgroundColor: '#f4eef1'
-    }
-}
 ];
-
-const rowStyle = (row, rowIndex) => {
-    const style = {};
-    if (row.Result === 'W') {
-        if (rowIndex % 2) {
-            style.backgroundColor = '#E8F5E9';
-        }
-        else {
-            style.backgroundColor = '#C8E6C9';
-        }
-    }
-    else if (row.Result === 'L') {
-        if (rowIndex % 2) {
-            style.backgroundColor = '#FFEBEE';
-        }
-        else {
-            style.backgroundColor = '#FFCDD2';
-        }
-    }
-    else {
-        style.backgroundColor = '#FFFDE7';
-    }
-
-    return style;
-};
 
 class App extends Component {
 
@@ -159,6 +117,7 @@ class App extends Component {
     }.bind(this);
 
     handleNewCompetitiveRecord = function(record) {
+        record.id = this.state.competitiveStats.length + 1;
         this.setState({
             competitiveStats: [...this.state.competitiveStats, record],
             showMsg: true
@@ -166,6 +125,7 @@ class App extends Component {
     }.bind(this);
 
     handleNewQuickplayRecord = function(record) {
+        record.id = this.state.quickplayStats.length + 1;
         this.setState({
             quickplayStats: [...this.state.quickplayStats, record],
             showMsg: true
@@ -216,25 +176,29 @@ class App extends Component {
         this.setState({
             loading: true
         });
-        axios.get(`http://localhost:3001/competitive`)
-            .then(res => {
-                this.setState({ competitiveStats: res.data });
-            });
-        axios.get(`http://localhost:3001/quickplay`)
-            .then(res => {
-                this.setState({ quickplayStats: res.data });
-            });
-        axios.get(`http://localhost:3001/heroes`)
-            .then(res => {
-                this.setState({ heroes: res.data });
-            });
-        axios.get(`http://localhost:3001/maps`)
-            .then(res => {
+        axios.all([
+            axios.get(`http://localhost:3001/competitive`),
+            axios.get(`http://localhost:3001/quickplay`),
+            axios.get(`http://localhost:3001/heroes`),
+            axios.get(`http://localhost:3001/maps`)
+        ])
+            .then(axios.spread((competitive, quickplay, heroes, maps) =>  {
+                let i = 1;
+                let competitivedata = competitive.data;
+                competitivedata.forEach(function(obj) { obj.id = i++ });
+
+                let j = 1;
+                let quickplaydata = quickplay.data;
+                quickplaydata.forEach(function(obj) { obj.id = j++ });
+
                 this.setState({
-                    maps: res.data,
+                    competitiveStats: competitivedata,
+                    quickplayStats: quickplaydata,
+                    heroes: heroes.data,
+                    maps: maps.data,
                     loading: false
                 })
-            });
+            }))
     }
 
     render() {
@@ -262,7 +226,15 @@ class App extends Component {
         function CompetitiveSection(props) {
             return (<div>
                 <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
-                    <Table data = {props.filteredData} columns = {props.columns} rowStyle = {rowStyle}/>
+                    {props.rowCount === 0 ? ('') : (
+                        <DataGrid
+                            rows = {filteredData}
+                            columns = {props.columns}
+                            rowGetter = {props.rowGetter}
+                            rowsCount = {props.rowCount}
+                            minHeight = {props.minHeight}
+                            onGridSort = {props.onGridSort}
+                        />)}
                 </div>
                 <Snackbar
                     open={props.showMsg}
@@ -276,7 +248,15 @@ class App extends Component {
         function QuickplaySection(props) {
             return (<div>
                 <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
-                    <Table data = {props.filteredData} columns = {props.columns} rowStyle = {rowStyle}/>
+                    {props.rowCount === 0 ? ('') : (
+                        <DataGrid
+                            rows = {filteredData}
+                            columns = {props.columns}
+                            rowGetter = {props.rowGetter}
+                            rowsCount = {props.rowCount}
+                            minHeight = {props.minHeight}
+                            onGridSort = {props.onGridSort}
+                        />)}
                 </div>
                 <Snackbar
                     open={props.showMsg}
@@ -298,35 +278,45 @@ class App extends Component {
                             handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}
                             handleResetFilter={() => this.onPressResetButton()}/>
                     <header className="App-header">
-                        <h1 className="App-title">Overwatch Stats Tracker</h1>
+                        <div>
+
+                            <h1 className="App-title">Overwatch Stats Tracker</h1>
+                        </div>
                     </header>
                     {this.state.loading ?
                         (
                             <LoadingIcon />
                         ) :
-                        (      <Tabs
-                                value={this.state.tabValue}
-                                onChange={this.handleTabValueChange}
-                            >
-                                <Tab label="Competitive" value="competitive">
-                                    <CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}
-                                                        filteredData = {filteredData}
-                                                        columns = {columns}
-                                                        onRequestClose = {this.handleSnackbarClose}
-                                                        showMsg = {this.state.showMsg}
-                                    />
-                                </Tab>
-                                <Tab label="Quickplay" value="quickplay">
-                                    <div>
-                                        <QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}
-                                                            filteredData = {filteredData}
-                                                            columns = {qpColumns}
+                        (
+                            <div>
+                                <Tabs
+                                    value={this.state.tabValue}
+                                    onChange={this.handleTabValueChange}
+                                >
+                                    <Tab label="Competitive" value="competitive">
+
+                                        <CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}
+                                                            columns = {columns}
+                                                            rowCount = {filteredData.length}
+                                                            minHeight = {600}
                                                             onRequestClose = {this.handleSnackbarClose}
                                                             showMsg = {this.state.showMsg}
                                         />
-                                    </div>
-                                </Tab>
-                            </Tabs>
+                                    </Tab>
+                                    <Tab label="Quickplay" value="quickplay">
+                                        <div>
+
+                                            <QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}
+                                                              columns = {qpColumns}
+                                                              rowCount = {filteredData.length}
+                                                              minHeight = {600}
+                                                              onRequestClose = {this.handleSnackbarClose}
+                                                              showMsg = {this.state.showMsg}
+                                            />
+                                        </div>
+                                    </Tab>
+                                </Tabs>
+                            </div>
 
                         )}
                 </div>

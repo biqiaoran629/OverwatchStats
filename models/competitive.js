@@ -49,3 +49,8 @@ module.exports.getCompetitive = function(callback, limit) {
 module.exports.addCompetitive = function(competitive, callback) {
     Competitive.create(competitive, callback);
 }
+
+module.exports.updateCompetitive = function(id, competitive, options, callback) {
+    var query = {_id: id};
+    Competitive.findOneAndUpdate(query, competitive, options, callback);
+}

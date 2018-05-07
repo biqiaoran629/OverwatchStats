@@ -1,22 +1,20 @@
 
 .App-header {
     background-image: url("./images/background.jpg");
-    background-size: contain;
-    height: 100vh;
+    background-size: cover;
+    height: 60vh;
     padding: 20px;
     color: black;
-    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Roboto';
 }
 
 .App-title {
-    font-size: 5.0em;
+    font-size: 4.0em;
     font-family: 'Roboto';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    align: 'center';
 }
 
 .App-intro {
@@ -116,6 +114,18 @@
     display: flex;
 }
 
+.green-background {
+     background-color: #64FFDA;
+ }
+
+.red-background {
+    background-color: #FFAB91;
+}
+
+.react-grid-Cell {
+    border: 0;
+    background: none !important;
+}
 @keyframes App-logo-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }

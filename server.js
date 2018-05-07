@@ -88,6 +88,30 @@ app.post('/quickplay', function(req, res){
     })
 });
 
+app.put('/quickplay/:_id', function(req, res){
+    var id = req.params._id;
+    var quickplay = req.body;
+    Quickplay.updateQuickplay(id, quickplay, {}, function(err, quickplay){
+        if (err) {
+            throw err;
+        }
+        res.json(quickplay);
+    })
+});
+
+app.put('/competitive/:_id', function(req, res){
+    var id = req.params._id;
+    var competitive = req.body;
+    Competitive.updateCompetitive(id, competitive, {}, function(err, competitive){
+        if (err) {
+            throw err;
+        }
+        res.json(competitive);
+    })
+});
+
+
+
 app.listen(3001);
 
 console.log('Running on port 3001...');

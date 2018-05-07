@@ -37,3 +37,8 @@ module.exports.getQuickplay = function(callback, limit) {
 module.exports.addQuickplay = function(quickplay, callback) {
     Quickplay.create(quickplay, callback);
 }
+
+module.exports.updateQuickplay = function(id, quickplay, options, callback) {
+    var query = {_id: id};
+    Quickplay.findOneAndUpdate(query, quickplay, options, callback);
+}
