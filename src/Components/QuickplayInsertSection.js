@@ -3,6 +3,7 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const results = ["Win","Lose"]
 
@@ -126,6 +127,7 @@ class QuickplayInsertSection extends React.Component {
         const isDisabled =  this.state.Map === '' || this.state.Character === '' || this.state.Result === '';
 
         return (
+            <MuiThemeProvider>
             <form noValidate autoComplete="off" style={{textAlign: 'center', marginBottom: '50px'}}>
 
                 <SelectField floatingLabelText="Character" onChange={(evt, newIndex) => this.handleHeroSelect(newIndex)} value={this.state.Character}  style = {styles} labelStyle={{textAlign: 'left'}}>
@@ -159,6 +161,7 @@ class QuickplayInsertSection extends React.Component {
                               disabled={isDisabled}
                 />
             </form>
+            </MuiThemeProvider>
         );
     }
 }

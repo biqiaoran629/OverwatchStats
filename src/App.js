@@ -9,6 +9,11 @@ import Snackbar from 'material-ui/Snackbar';
 import { PacmanLoader} from 'react-spinners';
 import Paper from 'material-ui/Paper';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import MainApp from 'grommet/components/App'
+import MyHeader from './Components/Header'
+import WelcomeSection from './Components/WelcomeSection'
+import TableSection from './Components/TableSection'
+import FooterSection from './Components/Footer'
 
 const columns = [
     {
@@ -225,17 +230,14 @@ class App extends Component {
 
         function CompetitiveSection(props) {
             return (<div>
-                <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
-                    {props.rowCount === 0 ? ('') : (
-                        <DataGrid
+                <DataGrid
                             rows = {filteredData}
                             columns = {props.columns}
                             rowGetter = {props.rowGetter}
                             rowsCount = {props.rowCount}
                             minHeight = {props.minHeight}
                             onGridSort = {props.onGridSort}
-                        />)}
-                </div>
+                        />
                 <Snackbar
                     open={props.showMsg}
                     message="Insert Successful"
@@ -247,8 +249,6 @@ class App extends Component {
 
         function QuickplaySection(props) {
             return (<div>
-                <div className= { props.isSlideMenuOpen ? ("tableWrapperOpen") : ("tableWrapper")}>
-                    {props.rowCount === 0 ? ('') : (
                         <DataGrid
                             rows = {filteredData}
                             columns = {props.columns}
@@ -256,8 +256,8 @@ class App extends Component {
                             rowsCount = {props.rowCount}
                             minHeight = {props.minHeight}
                             onGridSort = {props.onGridSort}
-                        />)}
-                </div>
+                        />
+
                 <Snackbar
                     open={props.showMsg}
                     message="Insert Successful"
@@ -268,61 +268,82 @@ class App extends Component {
         }
 
         return (
-            <MuiThemeProvider>
-                <div className="App-body">
-                    <Slider onStateChange={ this.isMenuOpen }
-                            heroes = {this.state.heroes}
-                            imgOnClick={ (name) => this.onClickHandler(name)}
-                            maps = {this.state.maps}
-                            handleNewCompetitiveRecord={ (record) => this.handleNewCompetitiveRecord(record)}
-                            handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}
-                            handleResetFilter={() => this.onPressResetButton()}/>
-                    <header className="App-header">
-                        <div>
+            <MainApp centered={false}>
+                <MyHeader/>
+                <WelcomeSection heroes = {this.state.heroes}
+                                />
+                <TableSection imgOnClick={ (name) => this.onClickHandler(name)}
+                              maps = {this.state.maps}
+                              heroes = {this.state.heroes}
+                              handleNewCompetitiveRecord={ (record) => this.handleNewCompetitiveRecord(record)}
+                              handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}
+                              handleResetFilter={() => this.onPressResetButton()}
+                              competitiveFilteredData = {competitiveData}
+                              quickplayFilteredData = {qpData}
+                              columns = {columns}
+                              qpColumns = {qpColumns}
+                              minHeight = {600}
+                              onRequestClose = {this.handleSnackbarClose}
+                              showMsg = {this.state.showMsg}/>
+                <FooterSection />
+            </MainApp>
 
-                            <h1 className="App-title">Overwatch Stats Tracker</h1>
-                        </div>
-                    </header>
-                    {this.state.loading ?
-                        (
-                            <LoadingIcon />
-                        ) :
-                        (
-                            <div>
-                                <Tabs
-                                    value={this.state.tabValue}
-                                    onChange={this.handleTabValueChange}
-                                >
-                                    <Tab label="Competitive" value="competitive">
-
-                                        <CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}
-                                                            columns = {columns}
-                                                            rowCount = {filteredData.length}
-                                                            minHeight = {600}
-                                                            onRequestClose = {this.handleSnackbarClose}
-                                                            showMsg = {this.state.showMsg}
-                                        />
-                                    </Tab>
-                                    <Tab label="Quickplay" value="quickplay">
-                                        <div>
-
-                                            <QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}
-                                                              columns = {qpColumns}
-                                                              rowCount = {filteredData.length}
-                                                              minHeight = {600}
-                                                              onRequestClose = {this.handleSnackbarClose}
-                                                              showMsg = {this.state.showMsg}
-                                            />
-                                        </div>
-                                    </Tab>
-                                </Tabs>
-                            </div>
-
-                        )}
-                </div>
-            </MuiThemeProvider>
         );
     }
 }
 
 export default App;
+
+{/*<MuiThemeProvider>*/}
+    {/*<div className="App-body">*/}
+        {/*<Slider onStateChange={ this.isMenuOpen }*/}
+                {/*heroes = {this.state.heroes}*/}
+                {/*imgOnClick={ (name) => this.onClickHandler(name)}*/}
+                {/*maps = {this.state.maps}*/}
+                {/*handleNewCompetitiveRecord={ (record) => this.handleNewCompetitiveRecord(record)}*/}
+                {/*handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}*/}
+                {/*handleResetFilter={() => this.onPressResetButton()}/>*/}
+        {/*<header className="App-header">*/}
+            {/*<div>*/}
+
+                {/*<h1 className="App-title">Overwatch Stats Tracker</h1>*/}
+            {/*</div>*/}
+        {/*</header>*/}
+        {/*{this.state.loading ?*/}
+            {/*(*/}
+                {/*<LoadingIcon />*/}
+            {/*) :*/}
+            {/*(*/}
+                {/*<div>*/}
+                    {/*<Tabs*/}
+                        {/*value={this.state.tabValue}*/}
+                        {/*onChange={this.handleTabValueChange}*/}
+                    {/*>*/}
+                        {/*<Tab label="Competitive" value="competitive">*/}
+
+                            {/*<CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}*/}
+                                                {/*columns = {columns}*/}
+                                                {/*rowCount = {filteredData.length}*/}
+                                                {/*minHeight = {600}*/}
+                                                {/*onRequestClose = {this.handleSnackbarClose}*/}
+                                                {/*showMsg = {this.state.showMsg}*/}
+                            {/*/>*/}
+                        {/*</Tab>*/}
+                        {/*<Tab label="Quickplay" value="quickplay">*/}
+                            {/*<div>*/}
+
+                                {/*<QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}*/}
+                                                  {/*columns = {qpColumns}*/}
+                                                  {/*rowCount = {filteredData.length}*/}
+                                                  {/*minHeight = {600}*/}
+                                                  {/*onRequestClose = {this.handleSnackbarClose}*/}
+                                                  {/*showMsg = {this.state.showMsg}*/}
+                                {/*/>*/}
+                            {/*</div>*/}
+                        {/*</Tab>*/}
+                    {/*</Tabs>*/}
+                {/*</div>*/}
+
+            {/*)}*/}
+    {/*</div>*/}
+{/*</MuiThemeProvider>*/}

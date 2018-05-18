@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import axios from 'axios';
 import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const rank = ["Bronze","Silver","Gold","Platinum","Diamond","Master","Grandmaster"]
 
@@ -107,6 +108,7 @@ class CompetitiveInsertSection extends React.Component {
             || this.state.Character === '' || this.state.Result === '' || this.state.Season === '' || this.state.Rank === '';
 
         return (
+            <MuiThemeProvider>
             <form noValidate autoComplete="off" style={{textAlign: 'center', marginBottom: '50px'}}>
 
                 <SelectField floatingLabelText="Character" onChange={(evt, newIndex) => this.handleHeroSelect(newIndex)} value={this.state.Character}  style = {styles} labelStyle={{textAlign: 'left'}}>
@@ -205,6 +207,8 @@ class CompetitiveInsertSection extends React.Component {
                               disabled={isDisabled}
                 />
             </form>
+            </MuiThemeProvider>
+
         );
     }
 }
