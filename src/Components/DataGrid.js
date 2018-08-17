@@ -85,7 +85,8 @@ class DataGrid extends React.Component {
     render() {
         return (
             <ReactDataGrid
-                enableCellSelect={true}
+                enableCellSelect={false}
+                enableCellEdit={false}
                 columns={this.props.columns}
                 rowGetter={this.rowGetter}
                 rowsCount={this.props.rowsCount}

@@ -20,27 +20,27 @@ class Header extends React.Component {
                       float={false}
                       size='medium'
                       colorIndex='grey-1'>
-                <Title>
-                    Welcome, Minjun!
-                </Title>
-                <Box flex={true}
-                     justify='end'
-                     direction='row'
-                     responsive={false}>
-                    <Menu icon={<IconActions />}
-                          dropAlign={{"right": "right"}}>
-                        <Anchor href='#'
-                                className='active'>
-                            First
-                        </Anchor>
-                        <Anchor href='#'>
-                            Second
-                        </Anchor>
-                        <Anchor href='#'>
-                            Third
-                        </Anchor>
-                    </Menu>
-                </Box>
+                {/*<Title>*/}
+                    {/*Welcome, Minjun!*/}
+                {/*</Title>*/}
+                {/*<Box flex={true}*/}
+                     {/*justify='end'*/}
+                     {/*direction='row'*/}
+                     {/*responsive={false}>*/}
+                    {/*<Menu icon={<IconActions />}*/}
+                          {/*dropAlign={{"right": "right"}}>*/}
+                        {/*<Anchor href='#'*/}
+                                {/*className='active'>*/}
+                            {/*First*/}
+                        {/*</Anchor>*/}
+                        {/*<Anchor href='#'>*/}
+                            {/*Second*/}
+                        {/*</Anchor>*/}
+                        {/*<Anchor href='#'>*/}
+                            {/*Third*/}
+                        {/*</Anchor>*/}
+                    {/*</Menu>*/}
+                {/*</Box>*/}
             </MyHeader>
         )
     }
