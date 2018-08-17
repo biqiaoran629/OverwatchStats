@@ -1,5 +1,4 @@
 import Footer from 'grommet/components/Footer';
-import Title from 'grommet/components/Title';
 import React from "react";
 import Box from 'grommet/components/Box';
 import Paragraph from 'grommet/components/Paragraph';

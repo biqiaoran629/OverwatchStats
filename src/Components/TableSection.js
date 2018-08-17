@@ -1,14 +1,10 @@
 import React from "react";
 import Split from 'grommet/components/Split';
-import Section from 'grommet/components/Section';
-import Paragraph from 'grommet/components/Paragraph';
-import Box from 'grommet/components/Box';
-import Heading from 'grommet/components/Heading'
-import Article from 'grommet/components/Article'
 import Tab from 'grommet/components/Tab'
 import Tabs from 'grommet/components/Tabs'
 import SideBar from './SideBar'
 import DataGrid from './DataGrid';
+
 // import Snackbar from 'material-ui/Snackbar';
 
 class tableSection extends React.Component {
@@ -32,12 +28,6 @@ class tableSection extends React.Component {
                     minHeight = {props.minHeight}
                     onGridSort = {props.onGridSort}
                 />
-                {/*<Snackbar*/}
-                    {/*open={props.showMsg}*/}
-                    {/*message="Insert Successful"*/}
-                    {/*autoHideDuration={4000}*/}
-                    {/*onRequestClose={props.handleSnackbarClose}*/}
-                {/*/>*/}
             </div>)
         }
 
@@ -51,13 +41,6 @@ class tableSection extends React.Component {
                     minHeight = {props.minHeight}
                     onGridSort = {props.onGridSort}
                 />
-
-                {/*<Snackbar*/}
-                    {/*open={props.showMsg}*/}
-                    {/*message="Insert Successful"*/}
-                    {/*autoHideDuration={4000}*/}
-                    {/*onRequestClose={props.handleSnackbarClose}*/}
-                {/*/>*/}
             </div>)
         }
 
@@ -75,7 +58,7 @@ class tableSection extends React.Component {
                             filteredData = {this.props.competitiveFilteredData}
                             columns = {this.props.columns}
                             rowCount = {this.props.competitiveFilteredData.length}
-                            minHeight = '93vh'
+                            minHeight = '92vh'
                             onRequestClose = {this.props.onRequestClose}
                             showMsg = {this.props.showMsg}
                             />
@@ -85,7 +68,7 @@ class tableSection extends React.Component {
                                 filteredData = {this.props.quickplayFilteredData}
                                 columns = {this.props.qpColumns}
                                 rowCount = {this.props.quickplayFilteredData.length}
-                                minHeight = '93vh'
+                                minHeight = '92vh'
                                 onRequestClose = {this.props.onRequestClose}
                                 showMsg = {this.props.showMsg}
                             />

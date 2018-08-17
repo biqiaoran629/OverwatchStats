@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDataGrid from 'react-data-grid';
-import {Row} from 'react-data-grid';
-import PropTypes from 'prop-types';
+import ReactDataGrid, {Row} from 'react-data-grid';
 import update from 'immutability-helper';
 import axios from 'axios';
 

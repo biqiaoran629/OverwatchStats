@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import DataGrid from './Components/DataGrid';
-import Slider from './Components/SlideMenu';
 import axios from 'axios';
 import 'react-awesome-button/dist/themes/theme-blue.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Snackbar from 'material-ui/Snackbar';
-import { PacmanLoader} from 'react-spinners';
-import Paper from 'material-ui/Paper';
-import {Tabs, Tab} from 'material-ui/Tabs';
 import MainApp from 'grommet/components/App'
 import MyHeader from './Components/Header'
 import WelcomeSection from './Components/WelcomeSection'
 import TableSection from './Components/TableSection'
 import FooterSection from './Components/Footer'
+import WinPercentageSection from './Components/WinPercentageSection'
+import Toast from 'grommet/components/Toast'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Route from 'react-router-dom/Route'
 
 const columns = [
     {
@@ -216,62 +213,21 @@ class App extends Component {
             return value.Character.toString().toLowerCase() === this.state.filter.toLowerCase()
         }) : this.state.quickplayStats;
 
-        let filteredData = this.state.tabValue === 'competitive' ? (competitiveData) : (qpData);
-
-        const LoadingIcon = () => {
-            return (<div style={{position: 'absolute', top: '40%', left: '40%'}}>
-                <PacmanLoader
-                    color={'#4A90E2'}
-                    loading={true}
-                    size={150}
-                />
-            </div>)
-        }
-
-        function CompetitiveSection(props) {
-            return (<div>
-                <DataGrid
-                            rows = {filteredData}
-                            columns = {props.columns}
-                            rowGetter = {props.rowGetter}
-                            rowsCount = {props.rowCount}
-                            minHeight = {props.minHeight}
-                            onGridSort = {props.onGridSort}
-                        />
-                <Snackbar
-                    open={props.showMsg}
-                    message="Insert Successful"
-                    autoHideDuration={4000}
-                    onRequestClose={props.handleSnackbarClose}
-                />
-            </div>)
-        }
-
-        function QuickplaySection(props) {
-            return (<div>
-                        <DataGrid
-                            rows = {filteredData}
-                            columns = {props.columns}
-                            rowGetter = {props.rowGetter}
-                            rowsCount = {props.rowCount}
-                            minHeight = {props.minHeight}
-                            onGridSort = {props.onGridSort}
-                        />
-
-                <Snackbar
-                    open={props.showMsg}
-                    message="Insert Successful"
-                    autoHideDuration={4000}
-                    onRequestClose={props.handleSnackbarClose}
-                />
-            </div>)
-        }
-
         return (
+            <Router>
             <MainApp centered={false}>
                 <MyHeader/>
                 <WelcomeSection heroes = {this.state.heroes}
-                                />
+                />
+                {this.state.showMsg ? (<Toast status='ok'
+                                        onClose={this.handleSnackbarClose}>
+                    Insert Successful!
+                </Toast>) : ''}
+                <WinPercentageSection
+                                maps = {this.state.maps}
+                                heroes = {this.state.heroes}
+                                competitiveFilteredData = {competitiveData}
+                                quickplayFilteredData = {qpData}/>
                 <TableSection imgOnClick={ (name) => this.onClickHandler(name)}
                               maps = {this.state.maps}
                               heroes = {this.state.heroes}
@@ -283,67 +239,13 @@ class App extends Component {
                               columns = {columns}
                               qpColumns = {qpColumns}
                               minHeight = {600}
-                              onRequestClose = {this.handleSnackbarClose}
-                              showMsg = {this.state.showMsg}/>
+                              />
                 <FooterSection />
             </MainApp>
-
+            </Router>
         );
     }
 }
 
 export default App;
 
-{/*<MuiThemeProvider>*/}
-    {/*<div className="App-body">*/}
-        {/*<Slider onStateChange={ this.isMenuOpen }*/}
-                {/*heroes = {this.state.heroes}*/}
-                {/*imgOnClick={ (name) => this.onClickHandler(name)}*/}
-                {/*maps = {this.state.maps}*/}
-                {/*handleNewCompetitiveRecord={ (record) => this.handleNewCompetitiveRecord(record)}*/}
-                {/*handleNewQuickplayRecord={ (record) => this.handleNewQuickplayRecord(record)}*/}
-                {/*handleResetFilter={() => this.onPressResetButton()}/>*/}
-        {/*<header className="App-header">*/}
-            {/*<div>*/}
-
-                {/*<h1 className="App-title">Overwatch Stats Tracker</h1>*/}
-            {/*</div>*/}
-        {/*</header>*/}
-        {/*{this.state.loading ?*/}
-            {/*(*/}
-                {/*<LoadingIcon />*/}
-            {/*) :*/}
-            {/*(*/}
-                {/*<div>*/}
-                    {/*<Tabs*/}
-                        {/*value={this.state.tabValue}*/}
-                        {/*onChange={this.handleTabValueChange}*/}
-                    {/*>*/}
-                        {/*<Tab label="Competitive" value="competitive">*/}
-
-                            {/*<CompetitiveSection isSlideMenuOpen = {this.state.isSlideMenuOpen}*/}
-                                                {/*columns = {columns}*/}
-                                                {/*rowCount = {filteredData.length}*/}
-                                                {/*minHeight = {600}*/}
-                                                {/*onRequestClose = {this.handleSnackbarClose}*/}
-                                                {/*showMsg = {this.state.showMsg}*/}
-                            {/*/>*/}
-                        {/*</Tab>*/}
-                        {/*<Tab label="Quickplay" value="quickplay">*/}
-                            {/*<div>*/}
-
-                                {/*<QuickplaySection isSlideMenuOpen = {this.state.isSlideMenuOpen}*/}
-                                                  {/*columns = {qpColumns}*/}
-                                                  {/*rowCount = {filteredData.length}*/}
-                                                  {/*minHeight = {600}*/}
-                                                  {/*onRequestClose = {this.handleSnackbarClose}*/}
-                                                  {/*showMsg = {this.state.showMsg}*/}
-                                {/*/>*/}
-                            {/*</div>*/}
-                        {/*</Tab>*/}
-                    {/*</Tabs>*/}
-                {/*</div>*/}
-
-            {/*)}*/}
-    {/*</div>*/}
-{/*</MuiThemeProvider>*/}

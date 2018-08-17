@@ -1,13 +1,7 @@
 import React from 'react'
-import { slide as Menu } from 'react-burger-menu'
-import PropTypes from 'prop-types';
+import {slide as Menu} from 'react-burger-menu'
 import '../css/App.css';
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemTitle,
-    AccordionItemBody,
-} from 'react-accessible-accordion';
+import {Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle,} from 'react-accessible-accordion';
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 import CompetitiveInsertSection from "./CompetitiveInsertSection";

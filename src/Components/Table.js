@@ -7,7 +7,7 @@ const Table = ({ data, columns, rowStyle, rowEvents }) => {
             keyField='id'
             data={ data }
             columns={ columns }
-            bordered={ false }
+            bordered={ true }
             rowStyle ={ rowStyle }
             rowEvents={ rowEvents }
             condensed/>

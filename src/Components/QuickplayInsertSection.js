@@ -89,7 +89,7 @@ class QuickplayInsertSection extends React.Component {
             axios.post('http://localhost:3001/quickplay', newRecord)
                 .then(function (response) {
                     if (response.status === 200) {
-                        func(newRecord);
+                        func(response.data);
                     }
 
                 })

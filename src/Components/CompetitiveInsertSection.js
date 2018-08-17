@@ -134,7 +134,7 @@ class CompetitiveInsertSection extends React.Component {
                     floatingLabelText="Season"
                     errorText={this.state.seasonError}
                     onChange={(event, newValue) => {
-                        if (newValue && parseInt(newValue) == newValue) {
+                        if (newValue && parseInt(newValue) === newValue) {
                             this.setState({
                                 Season: newValue,
                                 seasonError: ''
@@ -170,7 +170,7 @@ class CompetitiveInsertSection extends React.Component {
                     floatingLabelText="SR"
                     errorText={this.state.srError}
                     onChange={(event, newValue) => {
-                        if (parseInt(newValue) == newValue) {
+                        if (parseInt(newValue) === newValue) {
                             this.setState({
                                 SR: newValue,
                                 srError: ''
@@ -188,7 +188,7 @@ class CompetitiveInsertSection extends React.Component {
                     floatingLabelText="SR difference"
                     errorText={this.state.srDiffError}
                     onChange={(event, newValue) => {
-                        if (parseInt(newValue) == newValue) {
+                        if (parseInt(newValue) === newValue) {
                             this.setState({
                                 Diff: newValue,
                                 srDiffError: ''
