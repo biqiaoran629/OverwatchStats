@@ -50,7 +50,6 @@ class WinPercentageObject extends React.Component {
                     <Meter vertical={false}
                            type='arc'
                            size='xsmall'
-                           onActive={console.log('active')}
                            value={0}
                     />
                     <Value value={0}
@@ -61,7 +60,6 @@ class WinPercentageObject extends React.Component {
                 <Meter vertical={false}
                        type='arc'
                        size='xsmall'
-                       onActive={console.log('active')}
                        value={(this.props.Win/this.props.Total * 100).toFixed(0)}
                        colorIndex = {this.props.Win/this.props.Total * 100 >= 50? ('ok') : ('critical')}
                 />

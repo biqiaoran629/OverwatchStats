@@ -10,7 +10,6 @@ import FooterSection from './Components/Footer'
 import WinPercentageSection from './Components/WinPercentageSection'
 import Toast from 'grommet/components/Toast'
 import { BrowserRouter as Router } from 'react-router-dom'
-import Route from 'react-router-dom/Route'
 
 const columns = [
     {
@@ -217,8 +216,7 @@ class App extends Component {
             <Router>
             <MainApp centered={false}>
                 <MyHeader/>
-                <WelcomeSection heroes = {this.state.heroes}
-                />
+                <WelcomeSection heroes = {this.state.heroes} maps = {this.state.maps} />
                 {this.state.showMsg ? (<Toast status='ok'
                                         onClose={this.handleSnackbarClose}>
                     Insert Successful!

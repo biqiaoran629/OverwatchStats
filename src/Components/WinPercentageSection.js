@@ -138,7 +138,7 @@ class WinPercentageSection extends React.Component {
                 <Box direction='row'
                      pad='large'
                      justify='center'
-                     align='centwwwwwer'
+                     align='center'
                      colorIndex='accent-2-a'
                      wrap={true}>
                     {this.winPercentageObjs(this.props.heroes, this.props.competitiveFilteredData)}

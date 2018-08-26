@@ -88,6 +88,25 @@ app.post('/quickplay', function(req, res){
     })
 });
 
+app.post('/quickplay/stats/:name', function(req, res) {
+    var name = req.params.name;
+    Quickplay.findStats(name, function(err, result){
+        if (err) {
+            throw err;
+        }
+        res.json(result);
+    })
+});
+
+app.post('/quickplay/stats$', function(req, res) {
+    Quickplay.findStatsTotal(function(err, result){
+        if (err) {
+            throw err;
+        }
+        res.json(result);
+    })
+});
+
 app.put('/quickplay/:_id', function(req, res){
     var id = req.params._id;
     var quickplay = req.body;

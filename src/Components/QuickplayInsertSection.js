@@ -51,6 +51,7 @@ class QuickplayInsertSection extends React.Component {
                 renderResult = true;
             }
         }
+
         if (renderResult) {
             this.setState({
                 Map: maps[index]
@@ -86,6 +87,15 @@ class QuickplayInsertSection extends React.Component {
             Result: this.state.Result.charAt(0),
             Mode: this.state.Mode
         }
+
+        let selectedMapType = this.props.maps.find(function(obj){
+            return obj.Name === newRecord.Map;
+        })
+
+        if (selectedMapType.Type === "Control") {
+            newRecord.Mode = "N/A";
+        }
+
             axios.post('http://localhost:3001/quickplay', newRecord)
                 .then(function (response) {
                     if (response.status === 200) {

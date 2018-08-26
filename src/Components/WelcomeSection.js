@@ -3,15 +3,9 @@ import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
 import Paragraph from 'grommet/components/Paragraph';
 import Box from 'grommet/components/Box';
-import Heading from 'grommet/components/Heading'
+import Heading from 'grommet/components/Heading';
+import IndividualHeroSummary from './IndividualHeroSummary';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-const Child = ({ match }) => (
-    <div>
-        <h3>ID: {match.params.id}</h3>
-    </div>
-);
-
 
 class WelcomeSection extends React.Component {
 
@@ -40,31 +34,37 @@ class WelcomeSection extends React.Component {
 
     render() {
 
-        const images = () => {return <Box direction='row'
-            justify='center'
-            align='center'
-            wrap={true}
-            pad='large'>
-            {this.createImages(this.props.heroes)}
-            </Box>};
+        const images = () => {return <Section
+                full={true}
+                colorIndex='accent-2-a'
+                pad='large'
+                justify='start'
+                align='center'
+            >
+                <Heading size='xlarge' strong={true} uppercase={true}>Overwatch Statistics App</Heading>
+                <Paragraph align='center' size='large'>
+                    Record your stats and see how you do with each hero!
+                </Paragraph>
+                <Box direction='row'
+                     justify='center'
+                     align='center'
+                     wrap={true}
+                     pad='large'>
+                    {this.createImages(this.props.heroes)}
+                </Box>
+            </Section>
+};
 
         return (
             <Article>
-                <Section
+                <Route path="/" exact component={images} />
+                <Route path="/:id" exact render={( {match, history} )=> <Section
                     full={true}
                     colorIndex='accent-2-a'
                     pad='large'
-                    justify='center'
+                    justify='start'
                     align='center'
-                >
-                    <Heading size='xlarge' strong={true} uppercase={true}>Overwatch Statistics App</Heading>
-                    <Paragraph align='center' size='large'>
-                        Record your stats and see how you do with each hero!
-                    </Paragraph>
-                    <Route path="/" exact component={images} />
-                    <Route path="/:id" exact component={Child} />
-
-                </Section>
+                ><IndividualHeroSummary match={match} history={history} maps={this.props.maps}/></Section>}/>
             </Article>
         )
     }
