@@ -20,5 +20,5 @@ var Maps = module.exports = mongoose.model('Maps', mapsSchema, 'maps');
 // Get Competitive
 
 module.exports.getMaps = function(callback, limit) {
-    Maps.find(callback).sort({Type: -1}).limit(limit);
+    Maps.find(callback).sort({Type: -1, Name: -1}).limit(limit);
 }

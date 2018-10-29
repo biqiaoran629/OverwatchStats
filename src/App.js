@@ -178,10 +178,10 @@ class App extends Component {
             loading: true
         });
         axios.all([
-            axios.get(`http://localhost:3001/competitive`),
-            axios.get(`http://localhost:3001/quickplay`),
-            axios.get(`http://localhost:3001/heroes`),
-            axios.get(`http://localhost:3001/maps`)
+            axios.get(`/competitive`),
+            axios.get(`/quickplay`),
+            axios.get(`/heroes`),
+            axios.get(`/maps`)
         ])
             .then(axios.spread((competitive, quickplay, heroes, maps) =>  {
                 let i = 1;
