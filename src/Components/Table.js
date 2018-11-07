@@ -1,17 +1,18 @@
-import React from 'react'
-import BootstrapTable from 'react-bootstrap-table-next';
+import React from "react";
+import BootstrapTable from "react-bootstrap-table-next";
 
 const Table = ({ data, columns, rowStyle, rowEvents }) => {
-    return (
-        <BootstrapTable
-            keyField='id'
-            data={ data }
-            columns={ columns }
-            bordered={ true }
-            rowStyle ={ rowStyle }
-            rowEvents={ rowEvents }
-            condensed/>
-    )
-}
+  return (
+    <BootstrapTable
+      keyField="id"
+      data={data}
+      columns={columns}
+      bordered={true}
+      rowStyle={rowStyle}
+      rowEvents={rowEvents}
+      condensed
+    />
+  );
+};
 
 export default Table;

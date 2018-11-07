@@ -1,132 +1,135 @@
-
 .App-header {
-    background-image: url("./images/background.jpg");
-    background-size: cover;
-    height: 60vh;
-    padding: 20px;
-    color: black;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Roboto';
+  background-image: url("./images/background.jpg");
+  background-size: cover;
+  height: 60vh;
+  padding: 20px;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto";
 }
 
 .App-title {
-    font-size: 4.0em;
-    font-family: 'Roboto';
-    align: 'center';
+  font-size: 4em;
+  font-family: "Roboto";
+  align: "center";
 }
 
 .App-intro {
-    font-size: large;
-    font-family: 'Roboto';
+  font-size: large;
+  font-family: "Roboto";
 }
 
 .App-body {
-    background-color: #E1F5FE;
-    height: 100%;
-    font-family: 'Roboto';
+  background-color: #e1f5fe;
+  height: 100%;
+  font-family: "Roboto";
 }
 
 .btn-div {
-    margin-left:auto;
-    margin-right:5%;
-    text-align: right;
+  margin-left: auto;
+  margin-right: 5%;
+  text-align: right;
 }
 
 .tableWrapper {
-    flex:1;
-    width:90%;
-    margin-left: 5%;
-    margin-top: 20px;
-    height: 95vh;
-    overflow-y: auto;
+  flex: 1;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 20px;
+  height: 95vh;
+  overflow-y: auto;
 }
 
 .tableWrapperOpen {
-    flex:1;
-    width:80%;
-    margin-left: 17%;
-    margin-top: 20px;
+  flex: 1;
+  width: 80%;
+  margin-left: 17%;
+  margin-top: 20px;
 }
 /* Slider */
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    left: 36px;
-    top: 36px;
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-    background: #373a47;
+  background: #373a47;
 }
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-    height: 24px;
-    width: 24px;
+  height: 24px;
+  width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-    background: #bdc3c7;
+  background: #bdc3c7;
 }
 
 /* General sidebar styles */
 .bm-menu {
-    background: #B3E5FC;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
+  background: #b3e5fc;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-    fill: #373a47;
+  fill: #373a47;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-    color: #b8b7ad;
-    padding: 0.8em;
+  color: #b8b7ad;
+  padding: 0.8em;
 }
 
 /* Styling of overlay */
 .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .bm-menu-wrap {
-    width: 340px !important;
+  width: 340px !important;
 }
 
 .accordion_title {
-    background-color: #90CAF9;
-    color: #444;
-    cursor: pointer;
-    padding: 7px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    display: flex;
+  background-color: #90caf9;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  display: flex;
 }
 
 .green-background {
-     background-color: #64FFDA;
- }
+  background-color: #64ffda;
+}
 
 .red-background {
-    background-color: #FFAB91;
+  background-color: #ffab91;
 }
 
 .react-grid-Cell {
-    border: 0;
-    background: none !important;
+  border: 0;
+  background: none !important;
 }
 @keyframes App-logo-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
