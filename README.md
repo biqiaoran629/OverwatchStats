@@ -1,10 +1,12 @@
- Project Title
+Project Title
 
 Overwatch stats tracker for users to record their in game stats
 
 ## Getting Started
 
 This project uses Node.js, Mongodb, and react.js
+
+To start, first run mongod, then run node server.js, then run npm run start.
 
 ### Prerequisites
 
@@ -122,7 +124,7 @@ db.heroes.insert([{
 {
 	"Name": "Zenyatta",
 	"Type": "Support"
-}]) 
+}])
 ```
 
 ```
@@ -195,7 +197,9 @@ db.maps.insert([{
 	"Type": "Control"
 }])
 ```
+
 You also need to have competitive data. They are putting in the competitive collection
+
 ```
 db.competitive.insert([{
    "Date": "4/1/2018",
@@ -219,4 +223,4 @@ db.competitive.insert([{
    "SR": 3715,
    "Diff": 24
  }])
- ```
+```
